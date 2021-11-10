@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <pthread.h>
 #include <time.h>
+#include "lock.h"
 #define BILLION 1000000000L
 #define N 10000
 
@@ -40,20 +42,21 @@ int time_greater_than(struct timespec* a, struct timespec* b)
 // Ubench
 //-----------------------------------------------------------------
 // the PA ubench code
-void ubench(void* parm)
+void* ubench(void* parm)
 {
     GM* arg = (GM*) parm;
     int p=0, q=0;
     clock_gettime(CLOCK_MONOTONIC, &arg->start);
-    for(int i = 0; i < N)
+    for(int i = 0; i < N; ++i)
     {
-        lock_aquire(arg->lock);
+        s_lock(arg->lock);
         for(int j = 0; j < arg->k; ++j) ++q;
-        lock_release(arg->lock);
+        s_unlock(arg->lock);
         for(int j = 0; j < arg->m; ++j) ++p;
     }
     clock_gettime(CLOCK_MONOTONIC, &arg->end);
     arg->a[arg->pid] = p + q;
+    return NULL;
 }
 
 
@@ -77,9 +80,9 @@ void dispatch_threads_m_const(int m, int k)
     
     clock_gettime(CLOCK_MONOTONIC, &start);
     
-    lock_init(&l);
+    s_lock_init(&l);
 
-    for(i = 0; i < p-1; i++) {
+    for(int i = 0; i < p-1; i++) {
         args[i].a = a;
         args[i].k = k;
         args[i].m = m;
@@ -93,25 +96,24 @@ void dispatch_threads_m_const(int m, int k)
     args[p-1].m = m;
     args[p-1].pid = p-1;
     args[p-1].lock = &l;
-    ubench(args[p-1]);
+    ubench((void*)&args[p-1]);
 
     for(int i = 0; i < p-1; ++i){
-        pthread_join(&threads[i]);
+        pthread_join(threads[i], NULL);
     }
 
     clock_gettime(CLOCK_MONOTONIC, &end);
 
-    struct timespec* thread_start=args[0].start, thread_end=args[0].end;
+    //-----------------------------------------------------------------
+    // Output
+    //-----------------------------------------------------------------
+    struct timespec *thread_start=&args[0].start, *thread_end=&args[0].end;
     for(int i = 1; i < p; ++i)
     {
         if(time_greater_than(thread_start, &args[i].start)) thread_start = &args[0].start;
         if(time_less_than(thread_end, &args[i].end)) thread_end = &args[0].end;
     }
 
-
-    //-----------------------------------------------------------------
-    // Output
-    //-----------------------------------------------------------------
     double total_time = BILLION *(end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec);
     total_time = total_time / BILLION;
 
@@ -148,9 +150,9 @@ void dispatch_threads_m_prop(int m, int k)
     
     clock_gettime(CLOCK_MONOTONIC, &start);
     
-    lock_init(&l);
+    s_lock_init(&l);
 
-    for(i = 0; i < p-1; i++) {
+    for(int i = 0; i < p-1; i++) {
         args[i].a = a;
         args[i].k = k;
         args[i].m = m * i;
@@ -164,10 +166,10 @@ void dispatch_threads_m_prop(int m, int k)
     args[p-1].m = m * (p - 1);
     args[p-1].pid = p-1;
     args[p-1].lock = &l;
-    ubench(args[p-1]);
+    ubench((void*)&args[p-1]);
 
     for(int i = 0; i < p-1; ++i){
-        pthread_join(&threads[i]);
+        pthread_join(threads[i], NULL);
     }
 
     clock_gettime(CLOCK_MONOTONIC, &end);
@@ -175,8 +177,18 @@ void dispatch_threads_m_prop(int m, int k)
     //-----------------------------------------------------------------
     // Output
     //-----------------------------------------------------------------
+    struct timespec *thread_start=&args[0].start, *thread_end=&args[0].end;
+    for(int i = 1; i < p; ++i)
+    {
+        if(time_greater_than(thread_start, &args[i].start)) thread_start = &args[0].start;
+        if(time_less_than(thread_end, &args[i].end)) thread_end = &args[0].end;
+    }
+
     double total_time = BILLION *(end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec);
     total_time = total_time / BILLION;
+
+    double thread_time = BILLION *(thread_end->tv_sec - thread_start->tv_sec) +(thread_end->tv_nsec - thread_start->tv_nsec);
+    thread_time = thread_time / BILLION;
     
     printf("%lf,%lf\n", total_time, thread_time);
     
@@ -198,21 +210,21 @@ int main(int argc, char** argv)
     // Parse command line
     //-----------------------------------------------------------------
     if(argc != 2) {
-        printf("Usage: %s k\nAborting...\n", argc[0]);
+        printf("Usage: %s k\nAborting...\n", argv[0]);
         exit(0);
     }
 
     int k = atoi(argv[1]);
 
     if(k < 0){
-        printf("k must be greater than 0, aborting..."\n);
+        printf("k must be greater than 0, aborting...\n");
         exit(0);
     }
 
-    printf("total_time,thread_time"\n);
-    dispatch_threads_m_const(0);
-    dispatch_threads_m_const(1000);
-    dispatch_threads_m_prop(500);
+    printf("total_time,thread_time\n");
+    dispatch_threads_m_const(0, k);
+    dispatch_threads_m_const(1000, k);
+    dispatch_threads_m_prop(500, k);
 
     return 0;
 }

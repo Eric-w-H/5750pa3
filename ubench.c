@@ -40,7 +40,7 @@ int main(int argc, char** argv)
 
 
     // Setup
-
+    
 
     // Execution
     struct timespec start, end;

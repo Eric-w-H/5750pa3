@@ -4,7 +4,7 @@
 #include <time.h>
 #include "lock.h"
 #define BILLION 1000000000L
-#define N 10000
+#define N 500000000
 
 typedef struct {
     struct timespec start, end;

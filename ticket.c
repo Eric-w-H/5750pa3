@@ -6,34 +6,30 @@
 
 typedef struct {
     short lock_data; 
-} simplelock;
+} simple_lock;
 
 typedef struct {
-    simplelock* l;
+    simple_lock l;
     short next_available;
     short currently_serving
 } ticket_lock;
 
-void ticket_init( ticket_lock* tl )
+void init( ticket_lock* tl )
 {
-    tl->l = malloc( sizeof( simplelock ) );
-    s_lock_init( tl->l );
+    s_lock_init( &tl->l );
     tl->next_available = 0;
     tl->currently_serving = 0;
 }
 
-void ticket_acquire( ticket_lock* tl )
+void lock( ticket_lock* tl )
 {
-    s_lock( tl->l );
-    position = tl->next_available++;
+    s_lock( tl->l ); 
+    short position = tl->next_available++;
     s_unlock( tl->l );
     while ( tl->currently_serving < position ) {}
 }
 
-void ticket_unlock( ticket_lock* tl )
+void unlock( ticket_lock* tl )
 {
     tl->currently_serving++;
 }
-
-    
-    

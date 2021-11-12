@@ -1,0 +1,62 @@
+run_q.sh
+0 0
+72165.ece5750.ece.cornell.edu
+1 0
+72166.ece5750.ece.cornell.edu
+2 0
+72167.ece5750.ece.cornell.edu
+0 1667
+72168.ece5750.ece.cornell.edu
+1 1667
+72169.ece5750.ece.cornell.edu
+2 1667
+72170.ece5750.ece.cornell.edu
+0 2000
+72171.ece5750.ece.cornell.edu
+1 2000
+72172.ece5750.ece.cornell.edu
+2 2000
+72173.ece5750.ece.cornell.edu
+0 2500
+72174.ece5750.ece.cornell.edu
+1 2500
+72175.ece5750.ece.cornell.edu
+2 2500
+72176.ece5750.ece.cornell.edu
+0 5000
+72177.ece5750.ece.cornell.edu
+1 5000
+72178.ece5750.ece.cornell.edu
+2 5000
+72179.ece5750.ece.cornell.edu
+run_t.sh
+0 0
+72180.ece5750.ece.cornell.edu
+1 0
+72181.ece5750.ece.cornell.edu
+2 0
+72182.ece5750.ece.cornell.edu
+0 1667
+72183.ece5750.ece.cornell.edu
+1 1667
+72184.ece5750.ece.cornell.edu
+2 1667
+72185.ece5750.ece.cornell.edu
+0 2000
+72186.ece5750.ece.cornell.edu
+1 2000
+72187.ece5750.ece.cornell.edu
+2 2000
+72188.ece5750.ece.cornell.edu
+0 2500
+72189.ece5750.ece.cornell.edu
+1 2500
+72190.ece5750.ece.cornell.edu
+2 2500
+72191.ece5750.ece.cornell.edu
+0 5000
+72192.ece5750.ece.cornell.edu
+1 5000
+72193.ece5750.ece.cornell.edu
+2 5000
+72194.ece5750.ece.cornell.edu

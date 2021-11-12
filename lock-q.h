@@ -1,19 +1,21 @@
 #pragma once
 #define P 8
+#include <stdint.h>
 
 struct simple_lock {
-    short lock_data; 
+    int lock_data; 
 };
 
 struct queue_entry {
-    int lock_data;
-    char padding[60];
+    volatile uint8_t lock_data;
+    uint8_t padding[63];
 };
 
 struct queue_lock {
     struct simple_lock l;
     struct queue_entry queue[P] __attribute__ ((aligned (64)));
-    short index, running;
+    uint8_t index;
+    uint8_t running;
 };
 
 extern void s_lock_init(struct simple_lock *lkp);

@@ -1,13 +1,14 @@
 #pragma once
+#include <stdint.h>
 
 struct simple_lock {
-    short lock_data; 
+    int lock_data; 
 };
 
 struct ticket_lock {
     struct simple_lock l;
-    short next_available;
-    short currently_serving;
+    uint8_t next_available;
+    volatile uint8_t currently_serving;
 };
 
 extern void s_lock_init(struct simple_lock *lkp);

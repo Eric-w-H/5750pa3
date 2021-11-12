@@ -37,6 +37,15 @@ int time_greater_than(struct timespec* a, struct timespec* b)
     return 0;
 }
 
+void check_arr(struct queue_entry* e)
+{
+  int s = 8;
+  for(int i = 0; i < P; ++i)
+    s -= e[i].lock_data;
+  // printf("Number of open slots: %d\n", s);
+  if(s!=1) exit(-1);
+}
+
 
 //-----------------------------------------------------------------
 // Ubench
@@ -51,8 +60,14 @@ void* ubench(void* parm)
     {
         lock(arg->lock);
         for(int j = 0; j < arg->k; ++j) ++q;
+
+        // check_arr(arg->lock->queue);
+
         unlock(arg->lock);
         for(int j = 0; j < arg->m; ++j) ++p;
+
+        // if(i % 100000 == 0)
+        //   printf("Iter %d, pid %d\n", i, arg->pid);
     }
     clock_gettime(CLOCK_MONOTONIC, &arg->end);
     arg->a[arg->pid] = p + q;
@@ -209,12 +224,13 @@ int main(int argc, char** argv)
     //-----------------------------------------------------------------
     // Parse command line
     //-----------------------------------------------------------------
-    if(argc != 2) {
-        printf("Usage: %s k\nAborting...\n", argv[0]);
+    if(argc != 3) {
+        printf("Usage: %s k m\nAborting...\n", argv[0]);
         exit(0);
     }
 
     int k = atoi(argv[1]);
+    int m = atoi(argv[2]);
 
     if(k < 0){
         printf("k must be greater than 0, aborting...\n");
@@ -222,9 +238,9 @@ int main(int argc, char** argv)
     }
 
     printf("total_time,thread_time\n");
-    dispatch_threads_m_const(0, k);
-    dispatch_threads_m_const(1000, k);
-    dispatch_threads_m_prop(500, k);
-
+    if(m == 0) dispatch_threads_m_const(0, k);
+    if(m == 1) dispatch_threads_m_const(10000, k);
+    if(m == 2) dispatch_threads_m_prop(1000, k);
+    
     return 0;
 }

@@ -10,9 +10,9 @@ void lock_init( struct ticket_lock* tl )
 void lock( struct ticket_lock* tl )
 {
     s_lock( &tl->l ); 
-    short position = tl->next_available++;
+    uint8_t position = tl->next_available++;
     s_unlock( &tl->l );
-    while ( tl->currently_serving < position ) {}
+    while ( tl->currently_serving != position ) { }
 }
 
 void unlock( struct ticket_lock* tl )

@@ -228,7 +228,7 @@ int main(int argc, char** argv)
     printf("total_time,thread_time\n");
     dispatch_threads_m_const(0, k);
     dispatch_threads_m_const(10000, k);
-    dispatch_threads_m_prop(5000, k);
+    dispatch_threads_m_prop(1000, k);
 
     return 0;
 }

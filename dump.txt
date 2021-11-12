@@ -1,62 +1,67 @@
+compile tts
+compile ts
+compile ticket
+compile queue
+
 run_q.sh
 0 0
-72165.ece5750.ece.cornell.edu
+72195.ece5750.ece.cornell.edu
 1 0
-72166.ece5750.ece.cornell.edu
+72196.ece5750.ece.cornell.edu
 2 0
-72167.ece5750.ece.cornell.edu
+72197.ece5750.ece.cornell.edu
 0 1667
-72168.ece5750.ece.cornell.edu
+72198.ece5750.ece.cornell.edu
 1 1667
-72169.ece5750.ece.cornell.edu
+72199.ece5750.ece.cornell.edu
 2 1667
-72170.ece5750.ece.cornell.edu
+72200.ece5750.ece.cornell.edu
 0 2000
-72171.ece5750.ece.cornell.edu
+72201.ece5750.ece.cornell.edu
 1 2000
-72172.ece5750.ece.cornell.edu
+72202.ece5750.ece.cornell.edu
 2 2000
-72173.ece5750.ece.cornell.edu
+72203.ece5750.ece.cornell.edu
 0 2500
-72174.ece5750.ece.cornell.edu
+72204.ece5750.ece.cornell.edu
 1 2500
-72175.ece5750.ece.cornell.edu
+72205.ece5750.ece.cornell.edu
 2 2500
-72176.ece5750.ece.cornell.edu
+72206.ece5750.ece.cornell.edu
 0 5000
-72177.ece5750.ece.cornell.edu
+72207.ece5750.ece.cornell.edu
 1 5000
-72178.ece5750.ece.cornell.edu
+72208.ece5750.ece.cornell.edu
 2 5000
-72179.ece5750.ece.cornell.edu
+72209.ece5750.ece.cornell.edu
 run_t.sh
 0 0
-72180.ece5750.ece.cornell.edu
+72210.ece5750.ece.cornell.edu
 1 0
-72181.ece5750.ece.cornell.edu
+72211.ece5750.ece.cornell.edu
 2 0
-72182.ece5750.ece.cornell.edu
+72212.ece5750.ece.cornell.edu
 0 1667
-72183.ece5750.ece.cornell.edu
+72213.ece5750.ece.cornell.edu
 1 1667
-72184.ece5750.ece.cornell.edu
+72214.ece5750.ece.cornell.edu
 2 1667
-72185.ece5750.ece.cornell.edu
+72215.ece5750.ece.cornell.edu
 0 2000
-72186.ece5750.ece.cornell.edu
+72216.ece5750.ece.cornell.edu
 1 2000
-72187.ece5750.ece.cornell.edu
+72217.ece5750.ece.cornell.edu
 2 2000
-72188.ece5750.ece.cornell.edu
+72218.ece5750.ece.cornell.edu
 0 2500
-72189.ece5750.ece.cornell.edu
+72219.ece5750.ece.cornell.edu
 1 2500
-72190.ece5750.ece.cornell.edu
+72220.ece5750.ece.cornell.edu
 2 2500
-72191.ece5750.ece.cornell.edu
+72221.ece5750.ece.cornell.edu
 0 5000
-72192.ece5750.ece.cornell.edu
+72222.ece5750.ece.cornell.edu
 1 5000
-72193.ece5750.ece.cornell.edu
+72223.ece5750.ece.cornell.edu
 2 5000
-72194.ece5750.ece.cornell.edu
+72224.ece5750.ece.cornell.edu

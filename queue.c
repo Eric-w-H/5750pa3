@@ -7,7 +7,7 @@ void lock_init( struct queue_lock* ql )
     ql->queue[0].lock_data = 0;
     for ( int i = 1; i < P; i++ )
     {
-        ql->queue[i].lock_data = 0;
+        ql->queue[i].lock_data = 1;
     }
 
     ql->index = 0;

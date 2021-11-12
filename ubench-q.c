@@ -3,21 +3,20 @@
 #include <pthread.h>
 #include <time.h>
 
-#include "lock.h"
+#include "lock-q.h"
 #include "N.h"
 
 typedef struct {
     struct timespec start, end;
     int* a;
     int pid, k, m;
-    struct simple_lock* lock;
+    struct queue_lock* lock;
 } GM;
 
 
 //-----------------------------------------------------------------
 // time_less_than
 //-----------------------------------------------------------------
-// if a < b return 1
 int time_less_than(struct timespec* a, struct timespec* b)
 {
     if(a->tv_sec > b->tv_sec) return 0;
@@ -30,7 +29,6 @@ int time_less_than(struct timespec* a, struct timespec* b)
 //-----------------------------------------------------------------
 // time_greater_than
 //-----------------------------------------------------------------
-// if a > b return 1
 int time_greater_than(struct timespec* a, struct timespec* b)
 {
     if(a->tv_sec < b->tv_sec) return 0;
@@ -78,7 +76,7 @@ void dispatch_threads_m_const(int m, int k)
     // Assign work to each pthread, and create it,
     // spawning the thread
     struct timespec start, end;
-    struct simple_lock l;
+    struct queue_lock l;
     
     clock_gettime(CLOCK_MONOTONIC, &start);
     
@@ -109,8 +107,7 @@ void dispatch_threads_m_const(int m, int k)
     //-----------------------------------------------------------------
     // Output
     //-----------------------------------------------------------------
-    struct timespec *thread_start = &args[0].start;
-    struct timespec *thread_end   = &args[0].end;
+    struct timespec *thread_start=&args[0].start, *thread_end=&args[0].end;
     for(int i = 1; i < p; ++i)
     {
         if(time_greater_than(thread_start, &args[i].start)) thread_start = &args[i].start;
@@ -149,7 +146,7 @@ void dispatch_threads_m_prop(int m, int k)
     // Assign work to each pthread, and create it,
     // spawning the thread
     struct timespec start, end;
-    struct simple_lock l;
+    struct queue_lock l;
     
     clock_gettime(CLOCK_MONOTONIC, &start);
     
@@ -180,8 +177,7 @@ void dispatch_threads_m_prop(int m, int k)
     //-----------------------------------------------------------------
     // Output
     //-----------------------------------------------------------------
-    struct timespec *thread_start= &args[0].start;
-    struct timespec *thread_end  = &args[0].end;
+    struct timespec *thread_start=&args[0].start, *thread_end=&args[0].end;
     for(int i = 1; i < p; ++i)
     {
         if(time_greater_than(thread_start, &args[i].start)) thread_start = &args[i].start;
@@ -227,8 +223,8 @@ int main(int argc, char** argv)
 
     printf("total_time,thread_time\n");
     dispatch_threads_m_const(0, k);
-    dispatch_threads_m_const(10000, k);
-    dispatch_threads_m_prop(5000, k);
+    dispatch_threads_m_const(1000, k);
+    dispatch_threads_m_prop(500, k);
 
     return 0;
 }

@@ -45,7 +45,12 @@ int time_greater_than(struct timespec* a, struct timespec* b)
 void* ubench(void* parm)
 {
     GM* arg = (GM*) parm;
-    int p=0, q=0;
+    int p=0, q=0; //Ensure that p and q are shared variables like a pointer so that
+//these don't get compiled away. Just need to make sure that the q and p loops
+//don't get compiled away. 
+
+// If these are compiled away when choosing N, then if they aren't compiled away
+// in a later run, the execution time will look way too big
     clock_gettime(CLOCK_MONOTONIC, &arg->start);
     for(int i = 0; i < N; ++i)
     {

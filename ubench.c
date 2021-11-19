@@ -214,22 +214,29 @@ int main(int argc, char** argv)
     //-----------------------------------------------------------------
     // Parse command line
     //-----------------------------------------------------------------
-    if(argc != 2) {
-        printf("Usage: %s k\nAborting...\n", argv[0]);
+    if(argc != 3) {
+        printf("Usage: %s k m\nAborting...\n", argv[0]);
         exit(0);
     }
 
     int k = atoi(argv[1]);
+    int m = atoi(argv[2]);
 
     if(k < 0){
         printf("k must be greater than 0, aborting...\n");
         exit(0);
     }
 
+    if(m < 0 || m > 2){
+      printf("m must be between 0 and 2, aborting...\n");
+      exit(0);
+    }
+
+    printf("Using N=%d, k=%d,m=%d\n",N,k,m);
     printf("total_time,thread_time\n");
-    dispatch_threads_m_const(0, k);
-    dispatch_threads_m_const(10000, k);
-    dispatch_threads_m_prop(1000, k);
+    if(m==0) dispatch_threads_m_const(0, k);
+    if(m==1) dispatch_threads_m_const(10000, k);
+    if(m==2) dispatch_threads_m_prop(1000, k);
 
     return 0;
 }

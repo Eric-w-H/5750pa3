@@ -1,0 +1,129 @@
+compile tts
+compile ts
+compile ticket
+compile queue
+
+run_q.sh
+0 0
+73194.ece5750.ece.cornell.edu
+1 0
+73195.ece5750.ece.cornell.edu
+2 0
+73196.ece5750.ece.cornell.edu
+0 1667
+73197.ece5750.ece.cornell.edu
+1 1667
+73198.ece5750.ece.cornell.edu
+2 1667
+73199.ece5750.ece.cornell.edu
+0 2000
+73200.ece5750.ece.cornell.edu
+1 2000
+73201.ece5750.ece.cornell.edu
+2 2000
+73202.ece5750.ece.cornell.edu
+0 2500
+73203.ece5750.ece.cornell.edu
+1 2500
+73204.ece5750.ece.cornell.edu
+2 2500
+73205.ece5750.ece.cornell.edu
+0 5000
+73206.ece5750.ece.cornell.edu
+1 5000
+73207.ece5750.ece.cornell.edu
+2 5000
+73208.ece5750.ece.cornell.edu
+run_t.sh
+0 0
+73209.ece5750.ece.cornell.edu
+1 0
+73210.ece5750.ece.cornell.edu
+2 0
+73211.ece5750.ece.cornell.edu
+0 1667
+73212.ece5750.ece.cornell.edu
+1 1667
+73213.ece5750.ece.cornell.edu
+2 1667
+73214.ece5750.ece.cornell.edu
+0 2000
+73215.ece5750.ece.cornell.edu
+1 2000
+73216.ece5750.ece.cornell.edu
+2 2000
+73217.ece5750.ece.cornell.edu
+0 2500
+73218.ece5750.ece.cornell.edu
+1 2500
+73219.ece5750.ece.cornell.edu
+2 2500
+73220.ece5750.ece.cornell.edu
+0 5000
+73221.ece5750.ece.cornell.edu
+1 5000
+73222.ece5750.ece.cornell.edu
+2 5000
+73223.ece5750.ece.cornell.edu
+run_ts.sh
+0 0
+73224.ece5750.ece.cornell.edu
+1 0
+73225.ece5750.ece.cornell.edu
+2 0
+73226.ece5750.ece.cornell.edu
+0 1667
+73227.ece5750.ece.cornell.edu
+1 1667
+73228.ece5750.ece.cornell.edu
+2 1667
+73229.ece5750.ece.cornell.edu
+0 2000
+73230.ece5750.ece.cornell.edu
+1 2000
+73231.ece5750.ece.cornell.edu
+2 2000
+73232.ece5750.ece.cornell.edu
+0 2500
+73233.ece5750.ece.cornell.edu
+1 2500
+73234.ece5750.ece.cornell.edu
+2 2500
+73235.ece5750.ece.cornell.edu
+0 5000
+73236.ece5750.ece.cornell.edu
+1 5000
+73237.ece5750.ece.cornell.edu
+2 5000
+73238.ece5750.ece.cornell.edu
+run_tts.sh
+0 0
+73239.ece5750.ece.cornell.edu
+1 0
+73240.ece5750.ece.cornell.edu
+2 0
+73241.ece5750.ece.cornell.edu
+0 1667
+73242.ece5750.ece.cornell.edu
+1 1667
+73243.ece5750.ece.cornell.edu
+2 1667
+73244.ece5750.ece.cornell.edu
+0 2000
+73245.ece5750.ece.cornell.edu
+1 2000
+73246.ece5750.ece.cornell.edu
+2 2000
+73247.ece5750.ece.cornell.edu
+0 2500
+73248.ece5750.ece.cornell.edu
+1 2500
+73249.ece5750.ece.cornell.edu
+2 2500
+73250.ece5750.ece.cornell.edu
+0 5000
+73251.ece5750.ece.cornell.edu
+1 5000
+73252.ece5750.ece.cornell.edu
+2 5000
+73253.ece5750.ece.cornell.edu

@@ -231,6 +231,7 @@ int main(int argc, char** argv)
         exit(0);
     }
 
+    printf("Using N=%d, k=%d",N,k);
     printf("total_time,thread_time\n");
     if(m == 0) dispatch_threads_m_const(0, k);
     if(m == 1) dispatch_threads_m_const(10000, k);

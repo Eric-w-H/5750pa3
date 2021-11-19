@@ -4,4 +4,4 @@
 #PBS -M ewh73@cornell.edu
 #PBS -N PA3
 
-/home/ewh73/ece5750/pa3/ubench_tts $k
+/home/ewh73/ece5750/pa3/ubench_tts $k $m

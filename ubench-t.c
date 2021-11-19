@@ -9,7 +9,7 @@
 typedef struct {
     struct timespec start, end;
     int* a;
-    int pid, k, m;
+    int pid, k, m, p, q;
     struct ticket_lock* lock;
 } GM;
 
@@ -45,22 +45,26 @@ int time_greater_than(struct timespec* a, struct timespec* b)
 void* ubench(void* parm)
 {
     GM* arg = (GM*) parm;
-    int p=0, q=0; //Ensure that p and q are shared variables like a pointer so that
-//these don't get compiled away. Just need to make sure that the q and p loops
-//don't get compiled away. 
+    arg->p=0; 
+    arg->q=0;
 
-// If these are compiled away when choosing N, then if they aren't compiled away
-// in a later run, the execution time will look way too big
+    //Ensure that p and q are shared variables like a pointer so that
+    //these don't get compiled away. Just need to make sure that the q and p loops
+    //don't get compiled away. 
+
+    // If these are compiled away when choosing N, then if they aren't compiled away
+    // in a later run, the execution time will look way too big
+
     clock_gettime(CLOCK_MONOTONIC, &arg->start);
     for(int i = 0; i < N; ++i)
     {
         lock(arg->lock);
-        for(int j = 0; j < arg->k; ++j) ++q;
+        for(int j = 0; j < arg->k; ++j) {++arg->q;}
         unlock(arg->lock);
-        for(int j = 0; j < arg->m; ++j) ++p;
+        for(int j = 0; j < arg->m; ++j) {++arg->p;}
     }
     clock_gettime(CLOCK_MONOTONIC, &arg->end);
-    arg->a[arg->pid] = p + q;
+    arg->a[arg->pid] = arg->p + arg->q;
     return NULL;
 }
 

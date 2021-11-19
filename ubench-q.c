@@ -9,7 +9,7 @@
 typedef struct {
     struct timespec start, end;
     int* a;
-    int pid, k, m;
+    int pid, k, m, p, q;
     struct queue_lock* lock;
 } GM;
 
@@ -54,23 +54,24 @@ void check_arr(struct queue_entry* e)
 void* ubench(void* parm)
 {
     GM* arg = (GM*) parm;
-    int p=0, q=0;
+    arg->p=0;
+    arg->q=0;
     clock_gettime(CLOCK_MONOTONIC, &arg->start);
     for(int i = 0; i < N; ++i)
     {
         lock(arg->lock);
-        for(int j = 0; j < arg->k; ++j) ++q;
+        for(int j = 0; j < arg->k; ++j) {++arg->q;}
 
         // check_arr(arg->lock->queue);
 
         unlock(arg->lock);
-        for(int j = 0; j < arg->m; ++j) ++p;
+        for(int j = 0; j < arg->m; ++j) {++arg->p;}
 
         // if(i % 100000 == 0)
         //   printf("Iter %d, pid %d\n", i, arg->pid);
     }
     clock_gettime(CLOCK_MONOTONIC, &arg->end);
-    arg->a[arg->pid] = p + q;
+    arg->a[arg->pid] = arg->p + arg->q;
     return NULL;
 }
 

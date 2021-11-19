@@ -1,7 +1,7 @@
 rm ~/PA3.*
 ./compile.sh
 echo ""
-for SCRIPT in run_q.sh run_t.sh
+for SCRIPT in run_q.sh run_t.sh run_ts.sh run_tts.sh
 do
   echo $SCRIPT
   for K in 0 1667 2000 2500 5000
